@@ -60,6 +60,6 @@ wget https://raw.githubusercontent.com/fuzzymannerz/lighttpd-Link/master/rmLight
 ```bash
 rm -rf /home/steam/php7.3.10
 ```
-
+----
 ## Side-note
 If you require particular modules or libraries just open an issue and I'll see if I can compile them in sometime. :)
