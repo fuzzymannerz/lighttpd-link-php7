@@ -1,0 +1,1 @@
+# lighttpd-link-php7
