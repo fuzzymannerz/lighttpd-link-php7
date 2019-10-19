@@ -24,7 +24,7 @@ For the version without PHP, [have a look at this one](https://github.com/fuzzym
 # Usage
 ### Important One Time Setup:
 ```bash
-chmod 755 /usr/local/sbin/lighttpd && chmod -R 755 /home/steam/php/bin && chmod -R 755 /home/steam/php/sbin && ldconfig
+chmod 755 /usr/local/sbin/lighttpd && chmod -R 755 /home/steam/php7.3.10/bin && chmod -R 755 /home/steam/php7.3.10/sbin && ldconfig
 ```
 
 ### To Start:
