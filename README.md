@@ -16,7 +16,7 @@ For the version without PHP, [have a look at this one](https://github.com/fuzzym
 ----
 
 # How To Install
-1. [Download the archive](https://github.com/fuzzymannerz/lighttpd-Link/archive/master.zip) and extract it somewhere.
+1. [Download the archive](https://github.com/fuzzymannerz/lighttpd-link-php7/archive/master.zip) and extract it somewhere.
 2. Upload everything inside the "*Upload*" folder to the steam link's filesystem root via SSH. (Mounted or WinSCP etc...)
 
 ----
