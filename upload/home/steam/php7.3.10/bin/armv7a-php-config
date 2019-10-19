@@ -1,0 +1,90 @@
+#! /bin/sh
+
+SED="/bin/sed"
+prefix="/home/steam/php7.3.10"
+datarootdir="/home/steam/php7.3.10/php"
+exec_prefix="${prefix}"
+version="7.3.10"
+vernum="70310"
+include_dir="${prefix}/include/php"
+includes="-I$include_dir -I$include_dir/main -I$include_dir/TSRM -I$include_dir/Zend -I$include_dir/ext -I$include_dir/ext/date/lib"
+ldflags=" -L/home/fuzzy/steamlink-sdk/libxml2-2.9.9/build/lib"
+libs="-lcrypt   -lcrypt -lm  -lxml2 -lm -ldl -lxml2 -lm -ldl -lcrypt -lcrypt "
+extension_dir='/home/steam/php7.3.10/lib/php/extensions/no-debug-non-zts-20180731'
+man_dir=`eval echo ${datarootdir}/man`
+program_prefix="armv7a-"
+program_suffix=""
+exe_extension=""
+php_cli_binary=NONE
+php_cgi_binary=NONE
+configure_options=" 'AR=armv7a-cros-linux-gnueabi-ar' 'LD=armv7a-cros-linux-gnueabi-ld' 'RANLIB=armv7a-cros-linux-gnueabi-ranlib' '--host=armv7a-cros-linux-gnueabi' '--target=armv7a' '--prefix=/home/steam/php7.3.10' '--without-sqlite3' '--without-pdo-sqlite' '--without-pear' '--enable-simplexml' '--disable-mbregex' '--enable-sockets' '--enable-fpm' '--disable-opcache' '--enable-libxml' '--without-zlib' '--with-libxml-dir=/home/steam/libxml2' '--disable-all' 'host_alias=armv7a-cros-linux-gnueabi' 'target_alias=armv7a' 'CPP=armv7a-cros-linux-gnueabi-cpp --sysroot=/home/fuzzy/steamlink-sdk/rootfs'"
+php_sapis=" cli fpm phpdbg cgi"
+
+# Set php_cli_binary and php_cgi_binary if available
+for sapi in $php_sapis; do
+  case $sapi in
+  cli)
+    php_cli_binary="${exec_prefix}/bin/${program_prefix}php${program_suffix}${exe_extension}"
+    ;;
+  cgi)
+    php_cgi_binary="${exec_prefix}/bin/${program_prefix}php-cgi${program_suffix}${exe_extension}"
+    ;;
+  esac
+done
+
+# Determine which (if any) php binary is available
+if test "$php_cli_binary" != "NONE"; then
+  php_binary="$php_cli_binary"
+else
+  php_binary="$php_cgi_binary"
+fi
+
+# Remove quotes
+configure_options=`echo $configure_options | $SED -e "s#'##g"`
+
+case "$1" in
+--prefix)
+  echo $prefix;;
+--includes)
+  echo $includes;;
+--ldflags)
+  echo $ldflags;;
+--libs)
+  echo $libs;;
+--extension-dir)
+  echo $extension_dir;;
+--include-dir)
+  echo $include_dir;;
+--php-binary)
+  echo $php_binary;;
+--php-sapis)
+  echo $php_sapis;;
+--configure-options)
+  echo $configure_options;;
+--man-dir)
+  echo $man_dir;;
+--version)
+  echo $version;;
+--vernum)
+  echo $vernum;;
+*)
+  cat << EOF
+Usage: $0 [OPTION]
+Options:
+  --prefix            [$prefix]
+  --includes          [$includes]
+  --ldflags           [$ldflags]
+  --libs              [$libs]
+  --extension-dir     [$extension_dir]
+  --include-dir       [$include_dir]
+  --man-dir           [$man_dir]
+  --php-binary        [$php_binary]
+  --php-sapis         [$php_sapis]
+  --configure-options [$configure_options]
+  --version           [$version]
+  --vernum            [$vernum]
+EOF
+  exit 1;;
+esac
+
+exit 0
