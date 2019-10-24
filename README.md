@@ -21,15 +21,16 @@ For the version without PHP, [have a look at this one](https://github.com/fuzzym
 
 ----
 
-# Usage
-### Important One Time Setup:
+# First Time Setup
+### Enable the files to be executed:
 ```bash
-chmod 755 /usr/local/sbin/lighttpd && chmod -R 755 /home/steam/php7.3.10/bin && chmod -R 755 /home/steam/php7.3.10/sbin && ldconfig
+chmod 755 /usr/local/sbin/lighttpd && chmod -R 755 /home/steam/php7.3.10/bin && chmod -R 755 /home/steam/php7.3.10/sbin
 ```
+
 
 ### To Start:
 ```bash
-lighttpd -f /home/steam/http/serve.conf
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/php7.3.10/lib && lighttpd -f /home/steam/http/serve.conf
 ```
 
 It will now run as a background process until stopped or until the Steam Link is turned off.
@@ -56,10 +57,7 @@ wget https://raw.githubusercontent.com/fuzzymannerz/lighttpd-Link/master/rmLight
 wget https://raw.githubusercontent.com/fuzzymannerz/lighttpd-Link/master/rmLighttpd-Link.sh && chmod +x rmLighttpd-Link.sh && sh rmLighttpd-Link.sh keephttp
 ```
 
-**Then remove the PHP folder**
+**Then remove the PHP folder and uninstall file**
 ```bash
-rm -rf /home/steam/php7.3.10
+rm -rf /home/steam/php7.3.10 && rm rmLighttpd-Link.sh
 ```
-----
-## Side-note
-If you require particular modules or libraries just open an issue and I'll see if I can compile them in sometime. :)
